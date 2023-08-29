@@ -1,3 +1,6 @@
+#Joshua Parton's getting started Github 
+
+
 # streaming-01-getting-started - Joshua Parton modification
 
 > Get started with Python for streaming analytics
