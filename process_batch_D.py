@@ -35,9 +35,16 @@ OUTPUT_FILE_NAME = "batchfile_4_farenheit_updated.csv"
 # Use docstrings - and indentation matters!
 
 
-def convert_k_to_f(temp_k):
-    return (temp_k - 273.15) * 9/5 + 32
-
+def convert_k_to_f(temp_F):
+    """Convert to Kelvin to Farenheit.
+    Use the built-in round() function to round to 2 decimal places
+    Use the built-in float() function to convert the string to a float (a floating point number)
+    All CSV values are read as strings.
+    """
+    logging.debug(f"Calling convert_k_to_f() with {temp_F}.")
+    Farenheit = round(float(temp_F) - 273.15)*9/5 + 32
+    logging.debug(f"Converted {temp_F}C to {Farenheit}K.")
+    return Farenheit
 
 def process_rows(input_file_name, output_file_name):
     # Create a file object for input (r = read access)
@@ -59,19 +66,19 @@ def process_rows(input_file_name, output_file_name):
             writer = csv.writer(output_file, delimiter=",")
 
             # Write the header row to the output file
-            writer.writerow(["Year", "Month", "Day", "Time", "TempK"])
+            writer.writerow(["Year", "Month", "Day", "Time", "TempF"])
 
             # For each data row in the reader
             for row in reader:
                 # Extract the values from the input row into named variables
-                Year, Month, Day, Time, TempC = row
+                Year, Month, Day, Time, TempF = row
 
                 # Call the conversion function, passing in the TempC argument
                 # Assign the return value to a new variable named TempK
-                TempK = convert_c_to_k(TempC)
+                TempF = convert_k_to_f(TempF)
 
                 # Write the transformed data to the output file
-                writer.writerow([Year, Month, Day, Time, TempK])
+                writer.writerow([Year, Month, Day, Time, TempF])
 
 # ---------------------------------------------------------------------------
 # If this is the script we are running, then call some functions and execute code!
